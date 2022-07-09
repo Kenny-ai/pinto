@@ -15,7 +15,7 @@ function Payment() {
 
   const stripe = useStripe();
   const elements = useElements();
-  
+
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState("");
@@ -31,7 +31,7 @@ function Payment() {
       });
       setClientSecret(response.data.clientSecret);
     }
-  
+
     getClientSecret();
   }, [basket])
 
@@ -91,9 +91,9 @@ function Payment() {
 
         <h1>
           Checkout (
-            <Link to='/checkout'>
-              {basket?.length} items
-            </Link>)
+          <Link to='/checkout'>
+            {basket?.length} items
+          </Link>)
         </h1>
 
         <div className="payment-section">
@@ -107,7 +107,7 @@ function Payment() {
               <button type="submit">Submit</button>
             </form>
             <p>{newAddress}</p>
-            
+
             {/* <p>123 React Lane</p>
             <p>Los Angeles, CA</p> */}
           </div>
@@ -136,22 +136,22 @@ function Payment() {
           <div className="payment-title">
             <h3>Payment method</h3>
           </div>
-          <div className="payment-details">   
+          <div className="payment-details">
             {/* Stripe magic */}
 
             <form onSubmit={handleSubmit}>
               <CardElement onChange={handleChange} />
 
               <div className="payment-priceContainer">
-              <CurrencyFormat
-                renderText={(value) => (
+                <CurrencyFormat
+                  renderText={(value) => (
                     <h3>Order Total: {value}</h3>
-                )}
-                decimalScale={2}
-                value={getBasketTotal(basket)}
-                displayType={"text"}
-                thousandSeparator={true}
-                prefix={"$"}
+                  )}
+                  decimalScale={2}
+                  value={getBasketTotal(basket)}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"$"}
                 />
                 <button disabled={processing || disabled || succeeded}>
                   <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
